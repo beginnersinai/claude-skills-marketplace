@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{BUSINESS_NAME}} — AI Map — {{DATE}}</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    background: #f8f9fa;
+    color: #1a1a1a;
+    line-height: 1.5;
+  }
+  header {
+    margin-bottom: 32px;
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 16px;
+  }
+  h1 {
+    font-size: 32px;
+    margin: 0 0 4px 0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  h2 {
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .subtitle {
+    color: #6c757d;
+    font-size: 13px;
+    margin: 4px 0;
+  }
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .summary-card {
+    background: white;
+    padding: 20px 16px;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .summary-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .summary-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #6c757d;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+  }
+  .heatmap-wrapper {
+    overflow-x: auto;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  table.heatmap {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 900px;
+  }
+  table.heatmap th, table.heatmap td {
+    padding: 14px 8px;
+    text-align: center;
+    font-size: 12px;
+    border-right: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+  }
+  table.heatmap th {
+    background: #1a1a1a;
+    color: white;
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 16px 6px;
+    vertical-align: bottom;
+  }
+  table.heatmap th.venture-header {
+    text-align: left;
+    background: #2d3439;
+    padding-left: 16px;
+    width: 220px;
+    font-size: 11px;
+  }
+  table.heatmap td.venture-name {
+    text-align: left;
+    font-weight: 600;
+    background: #f8f9fa;
+    padding: 14px 16px;
+    color: #1a1a1a;
+    font-size: 13px;
+  }
+  .cell {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .cell-saturated {
+    background: #166534;
+    color: white;
+  }
+  .cell-active {
+    background: #65a30d;
+    color: white;
+  }
+  .cell-minimal {
+    background: #facc15;
+    color: #1a1a1a;
+  }
+  .cell-absent {
+    background: #dc2626;
+    color: white;
+  }
+  .opportunity-star {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,0.5);
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    font-size: 13px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .legend-swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .priority-list {
+    background: white;
+    padding: 24px;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    margin-top: 16px;
+  }
+  .priority-item {
+    padding: 16px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .priority-item:last-child { border-bottom: none; }
+  .priority-rank {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 28px;
+    margin-right: 12px;
+  }
+  .priority-title {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 15px;
+    color: #1a1a1a;
+  }
+  .priority-score {
+    float: right;
+    font-weight: 700;
+    color: #166534;
+    font-size: 14px;
+    background: #f0fdf4;
+    padding: 4px 10px;
+    border-radius: 12px;
+  }
+  .priority-detail {
+    margin-left: 40px;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #495057;
+    line-height: 1.6;
+  }
+  .press-send-section {
+    background: linear-gradient(to right, #fef9c3, #fef3c7);
+    border-left: 4px solid #facc15;
+    padding: 20px 24px;
+    margin: 16px 0;
+    border-radius: 8px;
+  }
+  .press-send-section h3 {
+    margin: 0 0 8px 0;
+    color: #713f12;
+  }
+  .press-send-item {
+    margin: 12px 0;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  .press-send-item strong { color: #713f12; }
+  .insight-box {
+    background: #1a1a1a;
+    color: #f8f9fa;
+    padding: 24px;
+    border-radius: 10px;
+    margin-top: 24px;
+  }
+  .insight-box h3 {
+    margin-top: 0;
+    color: #facc15;
+  }
+  .insight-box a {
+    color: #facc15;
+  }
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e9ecef;
+    font-size: 12px;
+    color: #6c757d;
+    text-align: center;
+  }
+  footer a {
+    color: #2563eb;
+    text-decoration: none;
+  }
+  footer a:hover { text-decoration: underline; }
+  @media (max-width: 768px) {
+    .summary { grid-template-columns: repeat(2, 1fr); }
+    h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI Map — {{BUSINESS_NAME}}</h1>
+  <p class="subtitle">Generated by <strong>The 44% Rule</strong> • {{DATE}}</p>
+  <p class="subtitle">Based on Kim, Kim &amp; Koning (2026) — field experiment with 515 startups</p>
+</header>
+
+<h2>Summary</h2>
+<div class="summary">
+  <div class="summary-card">
+    <div class="summary-number">{{VENTURE_COUNT}}</div>
+    <div class="summary-label">Ventures Scanned</div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-number">{{SATURATION_PERCENT}}%</div>
+    <div class="summary-label">AI Saturation</div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-number">{{GAP_COUNT}}</div>
+    <div class="summary-label">Gaps Identified</div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-number">{{PRESS_SEND_COUNT}}</div>
+    <div class="summary-label">Press-Send Wins</div>
+  </div>
+</div>
+
+<h2>The Heat Map</h2>
+<p>Each cell shows the current AI usage status for that venture × function intersection. <strong>★ marks the highest-impact opportunities to fill — these are where the 44% Rule applies most.</strong></p>
+
+<div class="heatmap-wrapper">
+<table class="heatmap">
+  <thead>
+    <tr>
+      <th class="venture-header">Venture / Project</th>
+      <th>Product<br>Dev</th>
+      <th>Strategy<br>&amp; Planning</th>
+      <th>Marketing<br>&amp; Growth</th>
+      <th>Sales<br>&amp; Revenue</th>
+      <th>Customer<br>Success</th>
+      <th>Finance<br>&amp; Pricing</th>
+      <th>Operations<br>&amp; Logistics</th>
+      <th>Content<br>Production</th>
+      <th>Data<br>&amp; Analytics</th>
+      <th>System<br>Admin</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{HEAT_MAP_ROWS}}
+    <!-- Each row format:
+    <tr>
+      <td class="venture-name">VentureName</td>
+      <td class="cell cell-saturated">SAT</td>
+      <td class="cell cell-active">ACT</td>
+      <td class="cell cell-absent">ABS<span class="opportunity-star">★</span></td>
+      ... 10 cells total ...
+    </tr>
+    -->
+  </tbody>
+</table>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#166534"></div> <strong>Saturated</strong> — AI deeply integrated</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#65a30d"></div> <strong>Active</strong> — AI is in use</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#facc15"></div> <strong>Minimal</strong> — Some AI, mostly manual</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#dc2626"></div> <strong>Absent</strong> — No AI involvement</div>
+  <div class="legend-item">★ — High-priority opportunity (apply the 44% Rule here)</div>
+</div>
+
+<h2>Top 10 Opportunities</h2>
+<p>Ranked by composite score: <code>(Revenue Impact × 2) + Capital Reduction + Ease of Implementation</code>. Maximum 20 points.</p>
+
+<div class="priority-list">
+  {{PRIORITY_LIST}}
+  <!-- Each item format:
+  <div class="priority-item">
+    <span class="priority-rank">1</span>
+    <span class="priority-title">VentureName × FunctionName: What to do</span>
+    <span class="priority-score">17/20</span>
+    <p class="priority-detail">Why it matters + which case study pattern applies (Gamma/RyzLabs/FazeShift/Ranger) + first concrete step</p>
+  </div>
+  -->
+</div>
+
+<h2>Press-Send Opportunities</h2>
+<div class="press-send-section">
+  <h3>⚡ The fastest wins — infrastructure already exists, just activate it</h3>
+  <p>These are gaps where you already have everything you need (the tools, the data, the workflow). The only missing piece is the AI activation. Highest leverage, fastest payoff. Start here.</p>
+  {{PRESS_SEND_LIST}}
+  <!-- Each item format:
+  <div class="press-send-item">
+    <strong>VentureName × FunctionName:</strong> What to activate
+    <br><small>Why it's "press send": brief explanation</small>
+  </div>
+  -->
+</div>
+
+<h2>The Research Insight</h2>
+<div class="insight-box">
+  <h3>Why this map matters</h3>
+  <p>Kim, Kim &amp; Koning (2026) ran a field experiment with <strong>515 startups</strong>. They found that the bottleneck to getting value from AI isn't capability — <strong>it's discovering where to deploy it.</strong></p>
+  <p>Companies that were shown specific examples of how OTHER companies use AI found <strong>44% more AI use cases</strong> in their own business than companies that weren't shown anything. They also generated <strong>1.9× higher revenue</strong>, completed <strong>12% more tasks</strong>, were <strong>18% more likely to acquire paying customers</strong>, and needed <strong>39.5% less external capital</strong>.</p>
+  <p>This map IS the showing. Every red cell is a place where you've never been shown what AI could do there. Every star is where the research suggests the highest leverage lies. <strong>The biggest gains come from product development and strategy — not from content (where most people start).</strong></p>
+  <p>Read the full breakdown: <a href="https://beginnersinai.org/mapping-ai-research-study/">beginnersinai.org/mapping-ai-research-study</a></p>
+</div>
+
+<h2>30-Day Action Plan</h2>
+<div class="priority-list">
+  {{ACTION_PLAN}}
+  <!-- Format:
+  <h3>Week 1</h3>
+  <p>Implement [specific action from top opportunity #1]</p>
+  <h3>Week 2</h3>
+  <p>...</p>
+  -->
+</div>
+
+<footer>
+  Generated by <strong>The 44% Rule</strong> — a free Claude Code plugin by <a href="https://beginnersinai.org">Beginners in AI</a><br>
+  Get the plugin: <a href="https://beginnersinai.org/get-the-44-percent-rule/">beginnersinai.org/get-the-44-percent-rule</a><br>
+  Re-run anytime with <code>/the-44-percent-rule:map</code>
+</footer>
+
+</body>
+</html>

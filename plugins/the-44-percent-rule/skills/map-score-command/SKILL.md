@@ -62,6 +62,23 @@ Identify any opportunities scoring 15+ that can be activated TODAY (Ease = 5). T
 
 Present these separately with a clear call to action.
 
+## Step 5: Update the HTML Heat Map (if it exists)
+
+If a corresponding `AI-MAP-[date].html` file exists in the working directory, update it to reflect the new prioritization:
+
+1. Read the existing HTML file
+2. Add or update the **★ opportunity star markers** in the heat map cells based on the new top-10 scoring (any cell whose venture × function appears in the top 10 should have a star)
+3. Replace the `Top 10 Opportunities` section content with the freshly scored ranked list
+4. Replace the `Press-Send Opportunities` section with the latest "Activate Now" list (Score ≥ 15 and Ease = 5)
+5. Save the file
+
+The HTML and MD files should always stay in sync. If the user runs `/map` then later `/map-score`, both files should reflect the latest scoring.
+
+If no HTML file exists, generate one using the template at `${CLAUDE_PLUGIN_ROOT}/skills/ai-mapping-audit/templates/heat-map-template.html` (see /map skill Step 6 for the format).
+
+After updating, tell the user:
+> Updated **AI-MAP-[date].html** with the new prioritization. Open it in your browser to see the visual heat map with ★ markers on your top opportunities.
+
 ## Key Principle
 
 > "Revenue and investment gains are largest at the 90th percentile and above." — Kim, Kim & Koning (2026)

@@ -49,14 +49,48 @@ For each gap (Minimal or Absent), provide:
 - **Tools Needed**: Which Claude features, MCP tools, or APIs to use
 - **Priority Score**: (Revenue Impact x 2) + Capital Reduction + Ease (each 1-5)
 
-## Step 4: Output
+## Step 4: Output (Markdown + HTML)
 
-Create a focused report with:
+Create TWO files in the user's working directory:
+
+### File 1: `AI-MAP-[venture-slug]-[date].md`
+
+Markdown report with:
 1. Venture overview and current state
 2. The 10-function map with status indicators
 3. Top 5 opportunities ranked by priority score
 4. Implementation timeline (7/14/30 day milestones)
 5. Anti-pattern check: Is this venture only using AI for content? If yes, flag it prominently.
+
+### File 2: `AI-MAP-[venture-slug]-[date].html`
+
+Visual heat map for this single venture. Read the template at:
+
+```
+${CLAUDE_PLUGIN_ROOT}/skills/ai-mapping-audit/templates/heat-map-template.html
+```
+
+Substitute the placeholders the same way as the full /map command, but with these adaptations for a single-venture audit:
+
+| Placeholder | Single-Venture Value |
+|---|---|
+| `{{BUSINESS_NAME}}` | The venture name (passed by user) |
+| `{{VENTURE_COUNT}}` | `1` |
+| `{{HEAT_MAP_ROWS}}` | A SINGLE row showing this venture's status across all 10 functions |
+| `{{PRIORITY_LIST}}` | Top 5 opportunities (not 10) |
+| `{{PRESS_SEND_LIST}}` | Press-send wins for this venture only |
+| `{{ACTION_PLAN}}` | 7/14/30 day milestones (not 4 weeks) |
+
+Even with a single venture, the visual is valuable — it gives the user an at-a-glance view of where AI is and isn't across all 10 functions for that one project. The single row is dramatic when most cells are red (Absent) and only 1-2 are green.
+
+After generating both files, tell the user:
+> Single-venture audit complete for **[venture name]**. I've generated:
+> 1. **AI-MAP-[venture-slug]-[date].md** — text report
+> 2. **AI-MAP-[venture-slug]-[date].html** — visual heat map (open in browser)
+>
+> Your top opportunity for this venture: [briefly describe #1]
+>
+> Open the HTML file to see the visual breakdown across all 10 functions.
 
 ## Important
 
