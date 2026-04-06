@@ -15,7 +15,30 @@ Tell the user:
 >
 > I'm going to scan your workspace, map where you're already using AI, and identify the high-value gaps where AI could be creating value but isn't.
 
-## Step 1: Venture Discovery
+## Step 1: Discovery Questions
+
+Before scanning any files, ask the user these questions to understand their business. These mirror the intervention from the research paper — the act of thinking through these questions is itself valuable.
+
+Ask these one at a time (not all at once):
+
+1. **"Walk me through what your business does, step by step — from when a customer first finds you to when they pay you and get what they bought."**
+   (This maps their production chain end-to-end)
+
+2. **"Where in that process do you spend time moving information between tools — copying from a spreadsheet into an email, updating a CRM after a call, transferring data between apps?"**
+   (This finds "glue work" — the FazeShift pattern from the paper)
+
+3. **"What parts of your business do you currently outsource, or wish you could do faster or cheaper?"**
+   (This finds automation opportunities — the Ranger pattern)
+
+4. **"If you could instantly test three different versions of something in your business, what would it be?"**
+   (This finds parallel prototyping opportunities — the RyzLabs pattern)
+
+5. **"What decisions do you currently make based on gut feeling that you wish you had data for?"**
+   (This finds strategy and analytics gaps — the highest-value functions per the research)
+
+Record the answers — they will inform the gap analysis in later steps.
+
+## Step 2: Venture Discovery
 
 Use the Agent tool with subagent_type "Explore" to thoroughly scan the user's working directory and identify:
 - All projects, businesses, and ventures
@@ -25,7 +48,7 @@ Use the Agent tool with subagent_type "Explore" to thoroughly scan the user's wo
 
 Be thorough — check subdirectories, read READMEs, check for config files, package.json files, .env files, GitHub Actions, automation scripts, etc.
 
-## Step 2: AI Usage Mapping
+## Step 3: AI Usage Mapping
 
 For each discovered venture, map current AI usage across these 10 production functions:
 
@@ -48,17 +71,28 @@ For each function, assign one of these statuses:
 - **Minimal** — Some AI usage but mostly manual
 - **Absent** — No AI involvement at all
 
-## Step 3: Gap Analysis
+## Step 4: Gap Analysis
 
-Read the file at `${CLAUDE_PLUGIN_ROOT}/skills/ai-mapping-audit/references/examples-from-other-firms.md` to load examples of how other firms have deployed AI in each function.
+Read these two reference files:
+- `${CLAUDE_PLUGIN_ROOT}/skills/ai-mapping-audit/references/examples-from-other-firms.md` — examples of how firms deploy AI in each function
+- `${CLAUDE_PLUGIN_ROOT}/skills/ai-mapping-audit/references/case-studies-from-paper.md` — the 4 real case studies from the Harvard/INSEAD research (Gamma, RyzLabs, FazeShift, Ranger)
 
 For each function marked "Minimal" or "Absent", generate specific recommendations:
 - What Claude/AI could do in this function
-- How other firms have deployed AI here (from the examples file)
+- How other firms have deployed AI here (from the examples and case studies)
+- Which case study pattern applies (process redesign like Gamma? Parallel prototyping like RyzLabs? Eliminating glue work like FazeShift? Services-first like Ranger?)
 - Expected impact (revenue, time saved, capital reduction)
 - Implementation complexity (Low/Medium/High)
 
-## Step 4: Priority Scoring
+### O-Ring Warning
+
+Check for the "partial automation trap": if AI is used in only one step of a multi-step process while the rest stays manual, flag it prominently:
+
+> **Warning: Partial automation detected.** AI is being used in [function] but the steps before and after it are still manual. Research shows that automating just one step in a chain preserves the bottleneck rather than relieving it. The biggest gains come from rethinking the entire process around AI — not just speeding up one piece.
+
+Cross-reference with the user's answers from Step 1, especially their description of their step-by-step process and where they identified glue work.
+
+## Step 5: Priority Scoring
 
 Score each opportunity on three dimensions (1-5 scale):
 - **Revenue Impact**: How much could this increase revenue or reduce costs?
@@ -69,7 +103,7 @@ Calculate a composite score: (Revenue Impact x 2) + Capital Reduction + Ease of 
 
 Sort opportunities by composite score, highest first.
 
-## Step 5: Generate the AI Map
+## Step 6: Generate the AI Map
 
 Create a file called `AI-MAP-[date].md` in the user's working directory with:
 

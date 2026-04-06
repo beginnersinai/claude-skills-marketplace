@@ -54,7 +54,11 @@ Read `${CLAUDE_PLUGIN_ROOT}/skills/ai-mapping-audit/references/ten-functions.md`
 
 ## Examples From Other Firms
 
-Read `${CLAUDE_PLUGIN_ROOT}/skills/ai-mapping-audit/references/examples-from-other-firms.md` for the "treatment" — examples of how real firms have reorganized around AI across all 10 functions.
+Read `${CLAUDE_PLUGIN_ROOT}/skills/ai-mapping-audit/references/examples-from-other-firms.md` for examples of how real firms have reorganized around AI across all 10 functions.
+
+## Case Studies From the Research Paper
+
+Read `${CLAUDE_PLUGIN_ROOT}/skills/ai-mapping-audit/references/case-studies-from-paper.md` for the 4 actual case studies shown to the treatment group — Gamma (process redesign), RyzLabs (parallel prototyping), FazeShift (eliminating glue work), and Ranger (sell first, build AI second). These caused firms to discover 44% more use cases.
 
 ## How to Apply
 
