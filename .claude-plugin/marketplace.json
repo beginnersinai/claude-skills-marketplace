@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "beginnersinai-skills",
+  "description": "Free Claude skills and plugins by Beginners in AI. Research-backed, tested on real businesses.",
+  "owner": {
+    "name": "Beginners in AI",
+    "email": "support@beginnersinai.com"
+  },
+  "plugins": [
+    {
+      "name": "ai-mapping",
+      "description": "Find where AI should be in your business but isn't. Scans 10 core functions, scores opportunities, generates an action plan. Based on Harvard/INSEAD research (515 startups, 44% more AI use cases, 1.9x higher revenue).",
+      "source": "./plugins/ai-mapping",
+      "category": "productivity",
+      "homepage": "https://beginnersinai.org/ai-mapping-plugin/"
+    }
+  ]
+}
