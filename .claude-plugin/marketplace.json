@@ -15,6 +15,13 @@
       "homepage": "https://beginnersinai.org/get-the-44-percent-rule/"
     },
     {
+      "name": "content-repurposer",
+      "description": "AI Content Repurposer \u2014 Turn one piece of content into 10 platform-native formats. Blog post to X thread, LinkedIn post, email newsletter, YouTube script, short-form video, carousel, podcast talking points, and more. Copy-paste ready output for every platform.",
+      "source": "./plugins/content-repurposer",
+      "category": "content",
+      "homepage": "https://beginnersinai.org/get-the-content-repurposer/"
+    },
+    {
       "name": "brand-pulse",
       "description": "Brand Pulse \u2014 Reputation monitoring and competitor research for any brand. Scans Reddit, Hacker News, Trustpilot, G2, Capterra, Sitejabber, Product Hunt, BBB, Glassdoor, app stores, and Google. Optional Playwright mode covers X, LinkedIn, Instagram, TikTok, and Facebook via your logged-in browser. Tracks sentiment trends over time.",
       "source": "./plugins/brand-pulse",
