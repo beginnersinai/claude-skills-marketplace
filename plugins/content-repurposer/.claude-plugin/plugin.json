@@ -1,12 +1,12 @@
 {
   "name": "content-repurposer",
-  "version": "1.0.0",
-  "description": "AI Content Repurposer — Turn one piece of content into 10 platform-native formats. Blog post to X thread, LinkedIn post, email newsletter, YouTube script, short-form video, carousel, podcast talking points, and more. Copy-paste ready output for every platform.",
+  "version": "1.0.1",
+  "description": "AI Content Repurposer \u2014 Turn one piece of content into 10 platform-native formats. Blog post to X thread, LinkedIn post, email newsletter, YouTube script, short-form video, carousel, podcast talking points, and more. Copy-paste ready output for every platform.",
   "author": {
     "name": "Beginners in AI"
   },
   "license": "MIT",
-  "homepage": "https://beginnersinai.org/get-the-content-repurposer/",
+  "homepage": "https://beginnersinai.org/the-content-repurposer/",
   "repository": "https://github.com/beginnersinai/content-repurposer",
   "keywords": [
     "content-repurposer",

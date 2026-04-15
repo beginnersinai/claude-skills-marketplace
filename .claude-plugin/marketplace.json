@@ -12,14 +12,14 @@
       "description": "The 44% Rule \u2014 Find 44% more AI use cases in your business. Scans 10 core functions, scores opportunities, generates an action plan. Based on Kim, Kim & Koning (2026) field experiment of 515 startups: businesses shown how others reorganize around AI find 44% more use cases and 1.9x higher revenue.",
       "source": "./plugins/the-44-percent-rule",
       "category": "productivity",
-      "homepage": "https://beginnersinai.org/get-the-44-percent-rule/"
+      "homepage": "https://beginnersinai.org/the-44-percent-rule/"
     },
     {
       "name": "content-repurposer",
       "description": "AI Content Repurposer \u2014 Turn one piece of content into 10 platform-native formats. Blog post to X thread, LinkedIn post, email newsletter, YouTube script, short-form video, carousel, podcast talking points, and more. Copy-paste ready output for every platform.",
       "source": "./plugins/content-repurposer",
       "category": "content",
-      "homepage": "https://beginnersinai.org/get-the-content-repurposer/"
+      "homepage": "https://beginnersinai.org/the-content-repurposer/"
     },
     {
       "name": "brand-pulse",
