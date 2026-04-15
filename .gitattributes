@@ -1,0 +1,14 @@
+# Ensure GitHub Linguist counts Markdown in the language breakdown.
+# Without this, GitHub treats .md as "documentation" and excludes it,
+# so a marketplace that's 99% Markdown shows as 100% HTML (because of a
+# single heat-map-template.html file inside a plugin).
+*.md linguist-detectable=true
+*.md linguist-documentation=false
+
+# Templates are plugin reference files, not the primary language.
+plugins/**/templates/*.html linguist-generated=true
+plugins/**/templates/*.html linguist-documentation=true
+
+# JSON manifests are not the primary language.
+**/.claude-plugin/*.json linguist-generated=true
+**/marketplace.json linguist-generated=true
