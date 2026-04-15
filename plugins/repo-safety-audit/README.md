@@ -91,6 +91,12 @@ Or update manually:
 /reload-plugins
 ```
 
+## Requirements
+
+- **Claude Code** (obviously).
+- **Python 3** — used for the UserPromptSubmit hook (`hooks/detect-github-url.py`). Comes preinstalled on macOS and most Linux distros. On Windows, install from [python.org](https://www.python.org/downloads/). Run `python3 --version` to confirm.
+- **`gh` CLI (optional)** — enables Step 6 (developer reputation) of the audit. Install from [cli.github.com](https://cli.github.com/) and run `gh auth login` once.
+
 ## Privacy
 
 - The skill reads public files on GitHub and local files you point it at.
