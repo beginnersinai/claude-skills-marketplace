@@ -36,6 +36,22 @@ The skill also auto-suggests itself after you install any third-party skill/plug
 - Any time a stranger's README says "just run this"
 - Proactively after an unfamiliar install, if you forgot to do it before
 
+## Auto-prompt on GitHub URLs (new in v1.1.0)
+
+Once this plugin is installed, **every time you paste a GitHub URL into chat, Claude will pause and ask if you want to run the audit first.** This turns the skill from "something you remember to run" into "something that asks itself." You can always say "No, just proceed" — the prompt is a safety net, not a toll gate.
+
+The prompt only fires when:
+- Your message contains at least one GitHub repo URL, AND
+- Your message does NOT already explicitly ask for an audit (e.g., "audit this," "is this safe to install")
+
+To silence the prompt permanently, add this to your shell config:
+
+```bash
+export REPO_SAFETY_AUDIT_SKIP_PROMPT=1
+```
+
+Or temporarily per-session: `REPO_SAFETY_AUDIT_SKIP_PROMPT=1 claude`.
+
 ## Verdict calibration
 
 - **SAFE** — Clean across all 6 checks, developer has a real track record, code matches purpose. Proceed with normal caution.

@@ -44,6 +44,10 @@ Or any of these:
 - "vet this plugin for me"
 - "check this github"
 
+**Or just paste the URL with no framing at all.** Starting in v1.1.0, Repo Safety Audit ships with a hook that auto-asks if you want to run the audit any time a GitHub URL appears in your message. You can always decline — the prompt is a safety net, not a toll gate.
+
+To silence the auto-prompt, add `export REPO_SAFETY_AUDIT_SKIP_PROMPT=1` to your shell config.
+
 The skill runs through six checks and gives you a verdict block like this:
 
 ```

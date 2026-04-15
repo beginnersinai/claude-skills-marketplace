@@ -1,7 +1,7 @@
 {
   "name": "repo-safety-audit",
-  "version": "1.0.0",
-  "description": "Security and trust audit for any third-party Claude Code skill, plugin, MCP server, GitHub repo, or npm package before you install it. Six-step audit checks for prompt injection, shell exfiltration, obfuscation, import mismatch, suspicious URLs, and developer reputation. Returns a SAFE / CAUTION / AVOID verdict with citations.",
+  "version": "1.1.0",
+  "description": "Security and trust audit for any third-party Claude Code skill, plugin, MCP server, GitHub repo, or npm package before you install it. Six-step audit checks for prompt injection, shell exfiltration, obfuscation, import mismatch, suspicious URLs, and developer reputation. Returns a SAFE / CAUTION / AVOID verdict with citations. Auto-prompts you to run the audit any time a GitHub URL appears in your message.",
   "author": {
     "name": "Beginners in AI",
     "url": "https://beginnersinai.org"
