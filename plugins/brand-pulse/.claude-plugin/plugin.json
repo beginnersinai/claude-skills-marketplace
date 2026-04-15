@@ -1,0 +1,21 @@
+{
+  "name": "brand-pulse",
+  "version": "1.0.0",
+  "description": "Reputation monitoring and competitor research. Scans Reddit, Hacker News, Trustpilot, G2, Capterra, Sitejabber, Product Hunt, BBB, Glassdoor, app stores, and Google. Optionally drives your logged-in browser via Playwright to cover X, LinkedIn, Instagram, TikTok, and Facebook. Tracks sentiment trends over time.",
+  "author": {
+    "name": "Beginners in AI",
+    "url": "https://beginnersinai.org"
+  },
+  "homepage": "https://beginnersinai.org/get-brand-pulse/",
+  "repository": "https://github.com/beginnersinai/brand-pulse",
+  "license": "MIT",
+  "keywords": [
+    "reputation",
+    "competitor-research",
+    "brand-monitoring",
+    "sentiment-analysis",
+    "reviews",
+    "reddit",
+    "trend-tracking"
+  ]
+}

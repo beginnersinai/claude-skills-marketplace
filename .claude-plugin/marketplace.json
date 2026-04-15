@@ -9,10 +9,17 @@
   "plugins": [
     {
       "name": "the-44-percent-rule",
-      "description": "The 44% Rule — Find 44% more AI use cases in your business. Scans 10 core functions, scores opportunities, generates an action plan. Based on Kim, Kim & Koning (2026) field experiment of 515 startups: businesses shown how others reorganize around AI find 44% more use cases and 1.9x higher revenue.",
+      "description": "The 44% Rule \u2014 Find 44% more AI use cases in your business. Scans 10 core functions, scores opportunities, generates an action plan. Based on Kim, Kim & Koning (2026) field experiment of 515 startups: businesses shown how others reorganize around AI find 44% more use cases and 1.9x higher revenue.",
       "source": "./plugins/the-44-percent-rule",
       "category": "productivity",
       "homepage": "https://beginnersinai.org/get-the-44-percent-rule/"
+    },
+    {
+      "name": "brand-pulse",
+      "description": "Brand Pulse \u2014 Reputation monitoring and competitor research for any brand. Scans Reddit, Hacker News, Trustpilot, G2, Capterra, Sitejabber, Product Hunt, BBB, Glassdoor, app stores, and Google. Optional Playwright mode covers X, LinkedIn, Instagram, TikTok, and Facebook via your logged-in browser. Tracks sentiment trends over time.",
+      "source": "./plugins/brand-pulse",
+      "category": "research",
+      "homepage": "https://beginnersinai.org/get-brand-pulse/"
     }
   ]
 }
