@@ -26,14 +26,14 @@
       "description": "Brand Pulse \u2014 Reputation monitoring and competitor research for any brand. Scans Reddit, Hacker News, Trustpilot, G2, Capterra, Sitejabber, Product Hunt, BBB, Glassdoor, app stores, and Google. Optional Playwright mode covers X, LinkedIn, Instagram, TikTok, and Facebook via your logged-in browser. Tracks sentiment trends over time.",
       "source": "./plugins/brand-pulse",
       "category": "research",
-      "homepage": "https://beginnersinai.org/get-brand-pulse/"
+      "homepage": "https://beginnersinai.org/brand-pulse/"
     },
     {
       "name": "repo-safety-audit",
       "description": "Repo Safety Audit \u2014 Vet any third-party Claude Code skill, plugin, MCP server, GitHub repo, or npm package before you install it. Six-step audit checks for prompt injection, shell exfiltration, obfuscation, import mismatch, suspicious URLs, and developer reputation. Returns a SAFE / CAUTION / AVOID verdict with citations.",
       "source": "./plugins/repo-safety-audit",
       "category": "security",
-      "homepage": "https://beginnersinai.org/get-repo-safety-audit/"
+      "homepage": "https://beginnersinai.org/repo-safety-audit/"
     }
   ]
 }
